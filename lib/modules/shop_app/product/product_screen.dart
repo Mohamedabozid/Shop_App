@@ -192,31 +192,36 @@ class ProductScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Text(
-                        '${model.price.round()}',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 12.0, color: defaultColor),
-                      ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      if (model.discount != 0)
-                        Text(
-                          '${model.oldPrice.round()}',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 10.0,
-                            color: Colors.grey,
-                            decoration: TextDecoration.lineThrough,
+                      Column(
+                        children: [
+                          Text(
+                            '${model.price.round()}',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 12.0, color: defaultColor),
                           ),
-                        ),
+                          SizedBox(
+                            width: 5.0,
+                          ),
+                          if (model.discount != 0)
+                            Text(
+                              '${model.oldPrice.round()}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 10.0,
+                                color: Colors.grey,
+                                decoration: TextDecoration.lineThrough,
+                              ),
+                            ),
+                        ],
+                      ),
                       Spacer(),
                       IconButton(
                         padding: EdgeInsets.zero,
                         onPressed: ()
                         {
+                          ShopCubit.get(context).changeFavorites(model.id!);
                           print(model.id);
                         },
                         icon: CircleAvatar(
@@ -228,7 +233,26 @@ class ProductScreen extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                      )
+                      ),
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        onPressed: ()
+                        {
+                          ShopCubit.get(context).changeCarts(model.id!);
+                          print(model.id);
+                        },
+                        icon: CircleAvatar(
+                          radius: 15.0,
+                          backgroundColor: ShopCubit.get(context).carts[model.id]!
+
+                              ? defaultColor : Colors.grey,
+                          child: Icon(
+                            Icons.add_shopping_cart,
+                            size: 14.0,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],

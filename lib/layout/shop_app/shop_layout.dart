@@ -54,6 +54,13 @@ class ShopLayout extends StatelessWidget {
               ),
               BottomNavigationBarItem(
                 icon: Icon(
+                  Icons.add_shopping_cart_sharp,
+                ),
+                label: 'Carts',
+              ),
+
+              BottomNavigationBarItem(
+                icon: Icon(
                   Icons.favorite,
                 ),
                 label: 'Favorite',
@@ -64,6 +71,7 @@ class ShopLayout extends StatelessWidget {
                 ),
                 label: 'Settings',
               ),
+
             ],
           ),
         );
